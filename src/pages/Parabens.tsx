@@ -1,5 +1,5 @@
-import { useSearchParams, Link } from "react-router-dom";
-import { PartyPopper, Gift, Check, ArrowLeft } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
+import { PartyPopper, Gift, Check, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Parabens = () => {
@@ -60,12 +60,12 @@ const Parabens = () => {
               Fique de olho no seu WhatsApp para novidades!
             </p>
             
-            <Link to="/">
+            <a href="https://www.instagram.com/betspremiumburgers/" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" className="mt-4 gap-2">
-                <ArrowLeft className="w-4 h-4" />
-                Voltar ao início
+                <Instagram className="w-4 h-4" />
+                Siga no Instagram
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
 
