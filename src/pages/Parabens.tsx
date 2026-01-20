@@ -57,7 +57,7 @@ const Parabens = () => {
 
           <div className="space-y-3">
             <p className="text-sm text-muted-foreground">
-              Fique de olho no seu WhatsApp e e-mail para novidades!
+              Fique de olho no seu WhatsApp para novidades!
             </p>
             
             <Link to="/">
