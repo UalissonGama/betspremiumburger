@@ -14,8 +14,6 @@ const GiveawayForm = () => {
   const [formData, setFormData] = useState({
     nome: "",
     telefone: "",
-    email: "",
-    dataNascimento: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,15 +29,13 @@ const GiveawayForm = () => {
       const { error } = await supabase.from("inscricoes_sorteio").insert({
         nome: formData.nome.trim(),
         telefone: formData.telefone.trim(),
-        email: formData.email.trim().toLowerCase(),
-        data_nascimento: formData.dataNascimento,
       });
 
       if (error) {
         if (error.code === "23505") {
           toast({
-            title: "E-mail já cadastrado! 📧",
-            description: "Este e-mail já está participando do sorteio.",
+            title: "Telefone já cadastrado! 📱",
+            description: "Este telefone já está participando do sorteio.",
             variant: "destructive",
           });
         } else {
@@ -93,38 +89,6 @@ const GiveawayForm = () => {
           onChange={handleChange}
           required
           maxLength={20}
-          className="bg-input-bg border-input-border focus:border-primary focus:ring-primary/20"
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="email" className="text-foreground/90">
-          E-mail
-        </Label>
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="seu@email.com"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          maxLength={255}
-          className="bg-input-bg border-input-border focus:border-primary focus:ring-primary/20"
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="dataNascimento" className="text-foreground/90">
-          Data de nascimento
-        </Label>
-        <Input
-          id="dataNascimento"
-          name="dataNascimento"
-          type="date"
-          value={formData.dataNascimento}
-          onChange={handleChange}
-          required
           className="bg-input-bg border-input-border focus:border-primary focus:ring-primary/20"
         />
       </div>
