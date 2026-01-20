@@ -1,9 +1,7 @@
 import GiveawayForm from "@/components/GiveawayForm";
 import { PartyPopper, Flame } from "lucide-react";
-
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative overflow-hidden">
+  return <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none" />
       
@@ -28,7 +26,7 @@ const Index = () => {
           </div>
           
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-            Anos de <span className="text-gradient">Bets Premium</span>
+            Anos de <span className="text-gradient">Bets Premium Burger</span>
           </h1>
           
           <p className="text-muted-foreground text-lg">
@@ -55,8 +53,6 @@ const Index = () => {
           Bets Premium Burger © 2024 • Sorteio válido até 28/02/2025
         </p>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
