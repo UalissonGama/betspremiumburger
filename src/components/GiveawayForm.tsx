@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Gift, PartyPopper, Check } from "lucide-react";
+import { Gift, Check } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const GiveawayForm = () => {
   const { toast } = useToast();
@@ -25,15 +26,43 @@ const GiveawayForm = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const { error } = await supabase.from("inscricoes_sorteio").insert({
+        nome: formData.nome.trim(),
+        telefone: formData.telefone.trim(),
+        email: formData.email.trim().toLowerCase(),
+        data_nascimento: formData.dataNascimento,
+      });
 
-    setIsLoading(false);
-    setIsSubmitted(true);
-    toast({
-      title: "Participação confirmada! 🎉",
-      description: "Boa sorte no sorteio de 1 ano grátis de burger!",
-    });
+      if (error) {
+        if (error.code === "23505") {
+          toast({
+            title: "E-mail já cadastrado! 📧",
+            description: "Este e-mail já está participando do sorteio.",
+            variant: "destructive",
+          });
+        } else {
+          throw error;
+        }
+        setIsLoading(false);
+        return;
+      }
+
+      setIsSubmitted(true);
+      toast({
+        title: "Participação confirmada! 🎉",
+        description: "Boa sorte no sorteio de 1 ano grátis de burger!",
+      });
+    } catch (error) {
+      console.error("Erro ao salvar inscrição:", error);
+      toast({
+        title: "Erro ao participar",
+        description: "Tente novamente em alguns instantes.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (isSubmitted) {
@@ -65,6 +94,7 @@ const GiveawayForm = () => {
           value={formData.nome}
           onChange={handleChange}
           required
+          maxLength={100}
           className="bg-input-bg border-input-border focus:border-primary focus:ring-primary/20"
         />
       </div>
@@ -81,6 +111,7 @@ const GiveawayForm = () => {
           value={formData.telefone}
           onChange={handleChange}
           required
+          maxLength={20}
           className="bg-input-bg border-input-border focus:border-primary focus:ring-primary/20"
         />
       </div>
@@ -97,6 +128,7 @@ const GiveawayForm = () => {
           value={formData.email}
           onChange={handleChange}
           required
+          maxLength={255}
           className="bg-input-bg border-input-border focus:border-primary focus:ring-primary/20"
         />
       </div>
