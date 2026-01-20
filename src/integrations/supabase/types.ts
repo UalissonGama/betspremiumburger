@@ -17,24 +17,24 @@ export type Database = {
       inscricoes_sorteio: {
         Row: {
           created_at: string
-          data_nascimento: string
-          email: string
+          data_nascimento: string | null
+          email: string | null
           id: string
           nome: string
           telefone: string
         }
         Insert: {
           created_at?: string
-          data_nascimento: string
-          email: string
+          data_nascimento?: string | null
+          email?: string | null
           id?: string
           nome: string
           telefone: string
         }
         Update: {
           created_at?: string
-          data_nascimento?: string
-          email?: string
+          data_nascimento?: string | null
+          email?: string | null
           id?: string
           nome?: string
           telefone?: string
