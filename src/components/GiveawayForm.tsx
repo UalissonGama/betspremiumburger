@@ -1,14 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Gift, Check } from "lucide-react";
+import { Gift } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const GiveawayForm = () => {
   const { toast } = useToast();
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     nome: "",
@@ -48,11 +49,8 @@ const GiveawayForm = () => {
         return;
       }
 
-      setIsSubmitted(true);
-      toast({
-        title: "Participação confirmada! 🎉",
-        description: "Boa sorte no sorteio de 1 ano grátis de burger!",
-      });
+      // Redireciona para a página de parabéns com o nome
+      navigate(`/parabens?nome=${encodeURIComponent(formData.nome.trim())}`);
     } catch (error) {
       console.error("Erro ao salvar inscrição:", error);
       toast({
@@ -60,26 +58,9 @@ const GiveawayForm = () => {
         description: "Tente novamente em alguns instantes.",
         variant: "destructive",
       });
-    } finally {
       setIsLoading(false);
     }
   };
-
-  if (isSubmitted) {
-    return (
-      <div className="flex flex-col items-center justify-center py-12 text-center animate-fade-in">
-        <div className="w-20 h-20 rounded-full bg-success/20 flex items-center justify-center mb-6">
-          <Check className="w-10 h-10 text-success" />
-        </div>
-        <h3 className="text-2xl font-bold text-foreground mb-2">
-          Você está participando!
-        </h3>
-        <p className="text-muted-foreground max-w-sm">
-          Aguarde o resultado do sorteio. Boa sorte, {formData.nome.split(" ")[0]}! 🍔
-        </p>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
