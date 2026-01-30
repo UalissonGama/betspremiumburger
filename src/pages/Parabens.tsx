@@ -41,8 +41,8 @@ const Parabens = () => {
           </h1>
 
           <p className="text-lg text-muted-foreground mb-6">
-            Você já está participando do sorteio de{" "}
-            <strong className="text-primary">1 ANO GRÁTIS</strong> de burger na Bets Premium Burger! 🍔
+            Você já está participando do Sorteio de{" "}
+            <strong className="text-primary">1 Ano Grátis</strong> no Bets Premium Burger! 🍔
           </p>
 
           <div className="bg-secondary/50 rounded-xl p-4 mb-6">
