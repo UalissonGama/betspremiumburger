@@ -101,7 +101,7 @@ const GiveawayForm = () => {
         <div className="flex items-center gap-2">
           <Receipt className="w-5 h-5 text-primary" />
           <Label htmlFor="cupom_fiscal" className="text-foreground font-semibold">
-            Cupom Fiscal
+            ID do Pedido
           </Label>
         </div>
         <Input
@@ -121,7 +121,7 @@ const GiveawayForm = () => {
           className="bg-background border-primary/40 focus:border-primary focus:ring-primary/30 tracking-widest text-center font-mono text-xl h-12"
         />
         <p className="text-xs text-muted-foreground text-center">
-          Insira os 9 números do seu cupom fiscal ({formData.cupom_fiscal.length}/9)
+          Insira os 9 números do ID do pedido ({formData.cupom_fiscal.length}/9)
         </p>
       </div>
 
