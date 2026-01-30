@@ -38,8 +38,8 @@ const GiveawayForm = () => {
       if (error) {
         if (error.code === "23505") {
           toast({
-            title: "Telefone já cadastrado! 📱",
-            description: "Este telefone já está participando do sorteio.",
+            title: "ID do pedido já cadastrado! 🎫",
+            description: "Este ID do pedido já está participando do sorteio.",
             variant: "destructive",
           });
         } else {
