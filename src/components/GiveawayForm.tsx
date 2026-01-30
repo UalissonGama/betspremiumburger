@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Gift } from "lucide-react";
+import { Gift, Receipt } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const GiveawayForm = () => {
@@ -97,10 +97,13 @@ const GiveawayForm = () => {
         />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="cupom_fiscal" className="text-foreground/90">
-          Cupom Fiscal
-        </Label>
+      <div className="space-y-3 p-4 rounded-xl bg-primary/10 border-2 border-primary/30 border-dashed">
+        <div className="flex items-center gap-2">
+          <Receipt className="w-5 h-5 text-primary" />
+          <Label htmlFor="cupom_fiscal" className="text-foreground font-semibold">
+            Cupom Fiscal
+          </Label>
+        </div>
         <Input
           id="cupom_fiscal"
           name="cupom_fiscal"
@@ -115,9 +118,9 @@ const GiveawayForm = () => {
           }}
           required
           maxLength={9}
-          className="bg-input-bg border-input-border focus:border-primary focus:ring-primary/20 tracking-widest text-center font-mono text-lg"
+          className="bg-background border-primary/40 focus:border-primary focus:ring-primary/30 tracking-widest text-center font-mono text-xl h-12"
         />
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-muted-foreground text-center">
           Insira os 9 números do seu cupom fiscal ({formData.cupom_fiscal.length}/9)
         </p>
       </div>
