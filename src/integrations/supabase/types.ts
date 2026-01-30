@@ -17,6 +17,7 @@ export type Database = {
       inscricoes_sorteio: {
         Row: {
           created_at: string
+          cupom_fiscal: string | null
           data_nascimento: string | null
           email: string | null
           id: string
@@ -25,6 +26,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          cupom_fiscal?: string | null
           data_nascimento?: string | null
           email?: string | null
           id?: string
@@ -33,6 +35,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          cupom_fiscal?: string | null
           data_nascimento?: string | null
           email?: string | null
           id?: string
