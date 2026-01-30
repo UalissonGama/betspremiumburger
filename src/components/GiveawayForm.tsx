@@ -14,7 +14,10 @@ const GiveawayForm = () => {
   const [formData, setFormData] = useState({
     nome: "",
     telefone: "",
+    cupom_fiscal: "",
   });
+
+  const isCupomValido = /^\d{9}$/.test(formData.cupom_fiscal);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -29,6 +32,7 @@ const GiveawayForm = () => {
       const { error } = await supabase.from("inscricoes_sorteio").insert({
         nome: formData.nome.trim(),
         telefone: formData.telefone.trim(),
+        cupom_fiscal: formData.cupom_fiscal.trim(),
       });
 
       if (error) {
@@ -93,9 +97,34 @@ const GiveawayForm = () => {
         />
       </div>
 
+      <div className="space-y-2">
+        <Label htmlFor="cupom_fiscal" className="text-foreground/90">
+          Cupom Fiscal
+        </Label>
+        <Input
+          id="cupom_fiscal"
+          name="cupom_fiscal"
+          type="text"
+          inputMode="numeric"
+          placeholder="000000000"
+          value={formData.cupom_fiscal}
+          onChange={(e) => {
+            // Permitir apenas números e limitar a 9 dígitos
+            const value = e.target.value.replace(/\D/g, '').slice(0, 9);
+            setFormData((prev) => ({ ...prev, cupom_fiscal: value }));
+          }}
+          required
+          maxLength={9}
+          className="bg-input-bg border-input-border focus:border-primary focus:ring-primary/20 tracking-widest text-center font-mono text-lg"
+        />
+        <p className="text-xs text-muted-foreground">
+          Insira os 9 números do seu cupom fiscal ({formData.cupom_fiscal.length}/9)
+        </p>
+      </div>
+
       <Button
         type="submit"
-        disabled={isLoading}
+        disabled={isLoading || !isCupomValido}
         className="w-full h-12 text-lg font-semibold mt-6 bg-gradient-primary hover:opacity-90 transition-all duration-300 shadow-glow"
       >
         {isLoading ? (
