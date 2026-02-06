@@ -50,7 +50,7 @@ const Index = () => {
 
         {/* Footer */}
         <p className="text-center text-xs text-muted-foreground mt-6">
-          Bets Premium Burger © 2024 • Sorteio válido até 28/02/2025
+          Bets Premium Burger © 2026 • Sorteio válido até 28/02/2025
         </p>
       </div>
     </div>;
